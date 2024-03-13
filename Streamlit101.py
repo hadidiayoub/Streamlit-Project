@@ -11,14 +11,18 @@ st.markdown("this is a **bold** *Markdown*")
 st.markdown("[link to google](https://www.google.com)")
 # https://www.markdownguide.org/cheat-sheet/
 
+df = pd.DataFrame({"Column 1": [1, 2, 3, 4, 5, 6, 7], "Column 2": [10, 20, 30, 40, 50, 60, 70]})
+st.table(df)
+
 
 col1, col2, col3 = st.columns(3)
 col1.metric("Temperature", "70 °F", "1.2 °F")
 col2.metric("Wind", "9 mph", "-8%")
 col3.metric("Humidity", "86%", "4%")
 
-
 x = st.text_input("Favourite movie")
+st.checkbox("checkbox", value="True")
+
 
 st.write(f"Your favorite movie is: {x}")
 is_clicked = st.button("click Me")
