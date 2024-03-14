@@ -1,7 +1,8 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-
+import time as ts
+from datetime import time
 
 st.title("This is a title")
 st.header("This is a header")
@@ -65,13 +66,74 @@ st.divider()
 
 #selectbox and select boxes
 select=st.selectbox("What is your favourite car ?", options=("Audi","BMW","Mercedes"))
-print(select)
+#print(select)
 
 multi_select=st.multiselect("What is your favourite Tech brand?",options=("Microsoft","Apple","Amazon","Oracle"))
 st.write(multi_select)
 
 st.divider()
 
+
+#This is a file uploader
+image = st.file_uploader("Please upload an Image", type=["png","jpg"])
+if image is not None:
+    st.image(image) #diplay an image
+    #st.video(video) #display a video
+
+st.divider()
+
+#those are different inputs
+st.slider("This is a slider", min_value=50, max_value=150, value=70)
+x = st.text_input("Your name", max_chars=11)
+y = st.text_area("short description")
+date=st.date_input("Your Birthday")
+time=st.time_input("set your time zone")
+st.divider()
+
+#function for progress bar on time
+'''
+def converter(value):
+    m,s,mm=value.split(":")
+    t_s=int(m)*60+int(mm)/1000
+    return t_s
+
+val=st.time_input("set Timer", value=time(0,0,0))
+if str(val) == "00:00:00":
+    st.write("Please sent timer")
+else:
+    sec=converter(str(val))
+    print(sec)
+    bar=st.progress(0)
+    per=sec/100
+    for i in range(10):
+        bar.progress((i+1)*10)
+        ts.sleep(per)
+'''
+
+#this is a User Registration form
+st.markdown("<h1>User Registration</h1>",unsafe_allow_html=True)
+with st.form("Form 2", clear_on_submit=True):
+    col1,col2=st.columns(2)
+    f_name=col1.text_input("First Name")
+    l_name=col2.text_input("Last Name")
+    st.text_input("Email Address")
+    st.text_input("Password")
+    st.text_input("Confirm Password")
+    day,month,year=st.columns(3)
+    day.text_input("Day")
+    month.text_input("Month")
+    year.text_input("Year")
+    s_state=st.form_submit_button("Register")
+    if s_state:
+        if f_name == "" and l_name=="":
+            st.warning("Please Fill above fields")
+        else:
+            st.success("Submitted Successfully")
+
+
+
+
+st.divider()
 dataframe = np.random.randn(10, 20)
 st.dataframe(dataframe)
 
@@ -90,3 +152,4 @@ st.latex(r'''
     \sum_{k=0}^{n-1} ar^k =
     a \left(\frac{1-r^{n}}{1-r}\right)
     ''')
+
