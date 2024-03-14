@@ -3,6 +3,8 @@ import pandas as pd
 import numpy as np
 import time as ts
 from datetime import time
+from matplotlib import pyplot as plt
+import numpy as np
 
 st.title("This is a title")
 st.header("This is a header")
@@ -130,8 +132,31 @@ with st.form("Form 2", clear_on_submit=True):
         else:
             st.success("Submitted Successfully")
 
+st.divider()
+#sidebar and charts
+st.sidebar.write("This is a sidebar")
+opt = st.sidebar.radio("Select a graph", options=("line","bar","hbar"))
 
+x=np.linspace(0,10,100)
+if opt=="line":
+    fig=plt.figure()
+    #plt.style.use("")
+    plt.plot(x,np.sin(x))
+    plt.plot(x,np.cos(x),"--")
+    st.write(fig)
+elif opt=="bar":
+    bar_x=np.array([1,2,3,4,5])
+    fig=plt.figure()
+    #plt.style.use("")
+    plt.bar(bar_x,bar_x*10)
 
+    st.write(fig)
+else:
+    bar_x=np.array([1,2,3,4,5])
+    fig=plt.figure()
+    #plt.style.use("")
+    plt.barh(bar_x*10,bar_x)
+    st.write(fig)
 
 st.divider()
 dataframe = np.random.randn(10, 20)
